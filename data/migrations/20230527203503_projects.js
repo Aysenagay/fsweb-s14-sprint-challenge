@@ -7,7 +7,7 @@ exports.up = function (knex) {
     .createTable("projects", (table) => {
       table.increments("project_id");
       table.string("project_name").notNullable();
-      table.string("project_desccription");
+      table.string("project_description");
       table.boolean("project_completed").defaultTo(false);
     })
     .createTable("resources", (t) => {
