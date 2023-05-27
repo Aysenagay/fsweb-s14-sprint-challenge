@@ -1,3 +1,4 @@
+// `Proje` modeli buraya
 const db = require("../../data/dbConfig");
 
 async function getAll() {
@@ -5,7 +6,7 @@ async function getAll() {
   let transformedProjects = allProjects.map((item) => {
     return {
       ...item,
-      project_completed: item.project_completed == 1,
+      project_completed: item.project_completed == 1, // true, false
     };
   });
   return transformedProjects;
@@ -20,9 +21,9 @@ async function create(project) {
   const inserted = await db("projects").where("project_id", insertedId).first();
 
   inserted.project_completed = inserted.project_completed == 1;
-
   return inserted;
 }
+
 module.exports = {
   getAll,
   create,

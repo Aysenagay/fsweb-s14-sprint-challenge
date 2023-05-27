@@ -13,22 +13,20 @@ async function getAll() {
       task_notes: allTasks[i].task_notes,
       project_name: allTasks[i].project_name,
       project_description: allTasks[i].project_description,
-      task_completed: allTasks[i].task_completed == 0 ? false : true,
+      task_completed: allTasks[i].task_completed == 0 ? false : true, //ternary operation
     };
     transformedTasks.push(newModel);
   }
   return transformedTasks;
 }
-async function create(project) {
-  const [insertedId] = await db("task").insert(project);
-  const inserted = await db("task").where("task_id", insertedId).first();
+async function create(task) {
+  const [insertedId] = await db("tasks").insert(task);
+  const inserted = await db("tasks").where("task_id", insertedId).first();
 
-
-    inserted.task_completed = inserted.task_completed == 1; //true & false
-    
-
+  inserted.task_completed = inserted.task_completed == 1; //true & false
   return inserted;
 }
+
 module.exports = {
   getAll,
   create,
